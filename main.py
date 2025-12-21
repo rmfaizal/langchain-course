@@ -1,6 +1,6 @@
 from courses.intro import intro
-from courses.reactprompt import *
 from courses.react_agent import *
+from courses.reactprompt import *
 from courses.searchagents import *
 
 
@@ -18,8 +18,12 @@ def main():
     custom_search()
     # react_prompt() : Sample web search using react prompt tavily.search method
     react_prompt()
-    # react_agent() : Sample web search using react agent with output parser
-    react_agent()
+    # react_agent_with_output_parser() : Sample web search using react agent with output parser
+    react_agent_with_output_parser()
+    # react_agent_with_structured_output() : Sample web search using react agent with structured output (recommended
+    # method over output parser)
+    react_agent_with_structured_output()
+
 
 if __name__ == "__main__":
     main()
