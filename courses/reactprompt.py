@@ -9,7 +9,7 @@ from langchain_openai import ChatOpenAI
 from langchain_tavily import TavilySearch
 
 tools = [TavilySearch()]
-llm = ChatOpenAI(model='gpt-4')
+llm = ChatOpenAI(model="gpt-4")
 react_prompt = hub.pull("hwchase17/react")
 agent = create_react_agent(
     llm=llm,
@@ -30,8 +30,5 @@ def react_prompt():
     print(result)
 
 
-
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     react_prompt()
-
