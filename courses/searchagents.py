@@ -1,5 +1,6 @@
 from typing import List
 
+import langchain.agents
 from dotenv import load_dotenv
 from pydantic import BaseModel, Field
 
@@ -8,6 +9,7 @@ load_dotenv()
 from langchain.agents import create_agent
 from langchain.tools import tool
 from langchain_core.messages import HumanMessage
+from langchain_ollama import ChatOllama
 from langchain_openai import ChatOpenAI
 from langchain_tavily import TavilySearch
 from tavily import TavilyClient
@@ -46,8 +48,8 @@ def search(query: str) -> str:
 
 
 def custom_search():
-    llm = ChatOpenAI(model="gpt-5-nano")
-    # llm = ChatOllama(model='gemma3:270m')
+    # llm = ChatOpenAI(model="gpt-5-nano")
+    llm = ChatOllama(model="qwen2.5:3b-instruct")
     tools = [search]
     agent = create_agent(model=llm, tools=tools)
     print("Hello from Tutorial: Tavily Custom Search")
@@ -63,8 +65,8 @@ def custom_search():
 
 
 def tavily_search():
-    llm = ChatOpenAI(model="gpt-5-nano")
-    # llm = ChatOllama(model='gemma3:270m')
+    # llm = ChatOpenAI(model="gpt-5-nano")
+    llm = ChatOllama(model="qwen2.5:3b-instruct")
     tools = [TavilySearch()]
     agent = create_agent(model=llm, tools=tools, response_format=AgentResponse)
     print("Hello from Tutorial: tavily search")
@@ -72,11 +74,14 @@ def tavily_search():
     result = agent.invoke(
         {
             "messages": HumanMessage(
-                content="search for job postings for an ai engineer using langchain in the Dubai area on linkedin and list their details"
+                content="search for job postings for an ai engineer using linkedin in the Dubai area on linkedin and list their details"
             )
         }
     )
+    # Access structured response from the agent
+    structured = result.get("structured_response", None)
     print(result)
+    print(structured if structured is not None else result)
 
 
 if __name__ == "__main__":
