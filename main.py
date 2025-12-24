@@ -3,6 +3,7 @@ from courses.react_agent import *
 from courses.react_native_tool_calling import native_tool_calling
 from courses.reactprompt import *
 from courses.searchagents import *
+from courses.rag_basics import rag_invoke
 
 
 def main():
@@ -27,6 +28,13 @@ def main():
     react_agent_with_structured_output()
     # native_tool_calling() : Manual Tool and LLM calling , instead of using Langchain Agent
     native_tool_calling()
+    # rag_invoke() : RetrievalAugumentedGeneration sample.
+    # Using -
+    #   OpenAIEmbeddings
+    #   PineConeVector storage
+    #   Sample data added to PineCone vectorstore using ingestion.py
+    rag_invoke()
+
 
 
 if __name__ == "__main__":
